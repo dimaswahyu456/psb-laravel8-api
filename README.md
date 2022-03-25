@@ -1,7 +1,7 @@
 # PSB (APLIKASI PENERIMAAN SISWA BARU)
 ## Install
 
-1. git clone 
+1. git clone https://github.com/dimaswahyu456/psb-laravel8-api.git
 2. composer install
 3. copy .env.example to .env
 4. php artsan key:generate
