@@ -1,4 +1,13 @@
 # PSB (APLIKASI PENERIMAAN SISWA BARU)
+
+## Requirements
+
+1. php version 7.4
+2. composer 2.1.3
+3. node v14.15
+4. npm 6.14
+5. yarn 1.22
+
 ## Install
 
 1. git clone https://github.com/dimaswahyu456/psb-laravel8-api.git
