@@ -41,6 +41,11 @@ git checkout -b nama_branch
 ## Check Route
 * php artisan route:list
 
+# Git Flow (Alur Git)
+* dilarang merge isi beta ke live dan master
+* dilarang pull beta ke live dan master
+* jika ingin membuat project baru, pastikan induknya adalah branch master atau branch live
+
 ## Perintah Bikin Branch Baru
 * git checkout -b nama_branch
 * contoh
@@ -48,3 +53,6 @@ git checkout -b nama_branch
 
 ## Tambahkan Code Dibawah ini untuk menambahkan route
 * Route::apiResource('/kota', App\Http\Controllers\Api\KotaController::class);
+
+
+
