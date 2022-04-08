@@ -18,3 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::apiResource('/siswa', App\Http\Controllers\Api\SiswaController::class);
+
+Route::apiResource('/user', App\Http\Controllers\Api\UserController::class);
+Route::get('/userlogin', 'App\Http\Controllers\Api\UserController@getuserlogin');
