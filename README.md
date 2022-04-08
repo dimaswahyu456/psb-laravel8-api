@@ -45,6 +45,7 @@ git checkout -b nama_branch
 * dilarang merge isi beta ke live dan master
 * dilarang pull beta ke live dan master
 * jika ingin membuat project baru, pastikan induknya adalah branch master atau branch live
+* dilarang push di branch project/design-system (hanya boleh pull di branch sendiri)
 
 ## Perintah Bikin Branch Baru
 * git checkout -b nama_branch
