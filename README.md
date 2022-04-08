@@ -13,9 +13,9 @@
 1. git clone https://github.com/dimaswahyu456/psb-laravel8-api.git
 2. composer install
 3. copy .env.example to .env
-4. php artsan key:generate
-5. php artsan serve
-6. dump hasblidb.sql (abaikan)
+4. php artisan key:generate
+5. php artisan serve
+6. dump dbpsb.sql
 
 git checkout -b nama_branch
 
