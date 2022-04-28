@@ -27,16 +27,16 @@ git checkout -b nama_branch
 
 * php artisan make:model nama_model -m
 * example:
-* php artisan make:model siswa -r 
+* php artisan make:model wali -r 
 
 ## Membuat Resource
 
 * php artisan make:resource nama_resource
 * example :
-* php artisan make:resource SiswaResource
+* php artisan make:resource WaliResource
 
 ## Membuat Controller
-* php artisan make:controller Api\SiswaController -r 
+* php artisan make:controller Api\WaliController -r 
 
 ## Check Route
 * php artisan route:list
