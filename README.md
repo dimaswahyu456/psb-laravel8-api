@@ -1,6 +1,6 @@
 # PSB (APLIKASI PENERIMAAN SISWA BARU)
 
-## Requirements
+##   Requirements
 
 1. php version 7.4
 2. composer 2.1.3
