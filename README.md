@@ -6,7 +6,7 @@
 2. composer 2.1.3
 3. node v14.15
 4. npm 6.14
-5. yarn 1.22
+5. yarn 1.22 
 
 ## Install
 
