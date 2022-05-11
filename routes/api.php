@@ -17,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('/siswa', App\Http\Controllers\Api\SiswaController::class);
+Route::apiResource('/wali', App\Http\Controllers\Api\WaliController::class);
+
+Route::get('wali', 'WaliController@index');
+Route::post('wali', 'WaliController@create');
+Route::get('/wali/{id}', 'Walicontroller@detail');
+Route::put('/wali/{id}', 'Walicontroller@update');
+Route::delete('/wali/{id}', 'Walicontroller@delete');
