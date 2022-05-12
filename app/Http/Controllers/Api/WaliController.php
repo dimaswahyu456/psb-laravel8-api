@@ -2,22 +2,32 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\siswa;
+use App\Models\Wali;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SiswaResource;
+use App\Http\Resources\WaliResource;
 use Illuminate\Support\Facades\Validator;
 
-class SiswaController extends Controller
+class WaliController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return new SiswaResource(siswa::all());
+        return new WaliResource(Wali::all());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -30,7 +40,7 @@ class SiswaController extends Controller
     {
         //set validation
         $validator = Validator::make($request->all(), [
-            'nama_siswa'   => 'required'
+            'wali_guru'   => 'required'
         ]);
 
         //response error validation
@@ -39,36 +49,48 @@ class SiswaController extends Controller
         }
 
         //save to database
-        $siswa = siswa::create([
-            'nama_siswa'     => $request->siswa
+        $Wali = Wali::create([
+            'wali_guru'     => $request->wali_guru
         ]);
 
-        return new SiswaResource($siswa);
+        return new WaliResource($Wali);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  siswa $siswa
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(siswa $siswa)
+    public function show(Wali $Wali)
     {
-        return new SiswaResource($siswa);
+        return new WaliResource($Wali);
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  siswa $siswa
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, siswa $siswa)
+    public function update(Request $request, Wali $Wali)
     {
         //set validation
         $validator = Validator::make($request->all(), [
-            'nama_siswa'   => 'required'
+            'wali_guru'   => 'required'
         ]);
 
         //response error validation
@@ -77,23 +99,24 @@ class SiswaController extends Controller
         }
 
         //update to database
-        $siswa->update([
-            'nama_siswa'     => $request->siswa
+        $Wali->update([
+            'wali_guru'     => $request->wali_guru
         ]);
 
-        return new SiswaResource($siswa);
+        return new WaliResource($Wali);
     }
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  siswa $siswa
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(siswa $siswa)
+    public function destroy(Wali $Wali)
     {
-        $siswa->delete();
+        $Wali->delete();
         
-        return new SiswaResource($siswa);
+        return new WaliResource($Wali);
     }
 }
