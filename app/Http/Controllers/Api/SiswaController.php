@@ -93,7 +93,7 @@ class SiswaController extends Controller
     public function destroy(siswa $siswa)
     {
         $siswa->delete();
-        
+
         return new SiswaResource($siswa);
     }
 }
