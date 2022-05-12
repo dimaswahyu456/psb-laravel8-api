@@ -39,7 +39,7 @@ class WaliController extends Controller
 
         //save to database
         $wali = Wali::create([
-            'wali_guru'     => $request->siswa
+            'wali_guru'     => $request->wali_guru
         ]);
 
         return new WaliResource($wali);
@@ -65,7 +65,7 @@ class WaliController extends Controller
 
         //update to database
         $wali->update([
-            'wali_guru'     => $request->siswa
+            'wali_guru'     => $request->wali_guru
         ]);
 
         return new WaliResource($wali);
