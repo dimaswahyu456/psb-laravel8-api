@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Wali extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'wali_guru'
+    ];
 }

@@ -19,7 +19,7 @@ class WaliController extends Controller
     {
         //
         $wali = new Wali();
-        $wali->wali = $request->wali_guru;
+        $wali->wali_guru = $request->wali_guru;
         $wali->save();
 
         return "Data Tersimpan";
