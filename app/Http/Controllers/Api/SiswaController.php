@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiswaResource;
 use Illuminate\Support\Facades\Validator;
+use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class SiswaController extends Controller
 {
@@ -46,13 +48,13 @@ class SiswaController extends Controller
 
         //save to database
         $siswa = siswa::create([
-            'nisn'     => $request->siswa,
-            'nama_siswa'     => $request->siswa,
-            'alamat_siswa'     => $request->siswa,
-            'jenis_kelamin'     => $request->siswa,
-            'agama'     => $request->siswa,
-            'tempat_lahir'     => $request->siswa,
-            'tanggal_lahir'     => $request->siswa
+            'nisn'     => $request->nisn,
+            'nama_siswa'     => $request->nama_siswa,
+            'alamat_siswa'     => $request->alamat_siswa,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'agama'     => $request->agama,
+            'tempat_lahir'     => $request->tempat_lahir,
+            'tanggal_lahir'     => $request->tanggal_lahir
         ]);
 
         return new SiswaResource($siswa);
@@ -96,13 +98,13 @@ class SiswaController extends Controller
 
         //update to database
         $siswa->update([
-            'nisn'     => $request->siswa,
-            'nama_siswa'     => $request->siswa,
-            'alamat_siswa'     => $request->siswa,
-            'jenis_kelamin'     => $request->siswa,
-            'agama'     => $request->siswa,
-            'tempat_lahir'     => $request->siswa,
-            'tanggal_lahir'     => $request->siswa
+            'nisn'     => $request->nisn,
+            'nama_siswa'     => $request->nama_siswa,
+            'alamat_siswa'     => $request->alamat_siswa,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'agama'     => $request->agama,
+            'tempat_lahir'     => $request->tempat_lahir,
+            'tanggal_lahir'     => $request->tanggal_lahir
         ]);
 
         return new SiswaResource($siswa);

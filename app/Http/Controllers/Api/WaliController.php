@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WaliResource;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class WaliController extends Controller
 {
@@ -76,5 +77,14 @@ class WaliController extends Controller
         $wali->delete();
 
         return new WaliResource($wali);
+    }
+
+    public function joinTable()
+    {
+        $data = DB::table('walis')
+            ->join('siswas', 'siswas.id_wali', '=', 'walis.id')
+            ->get();
+
+        return $data;
     }
 }
