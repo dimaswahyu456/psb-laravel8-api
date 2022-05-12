@@ -17,8 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('/siswa', App\Http\Controllers\Api\SiswaController::class);
+
 Route::get('/wali', 'App\Http\Controllers\Api\waliController@index');
 Route::post('/wali', 'App\Http\Controllers\Api\waliController@store');
 Route::put('/wali', 'App\Http\Controllers\Api\waliController@update');
 Route::delete('/wali', 'App\Http\Controllers\Api\waliController@destroy');
+
+Route::apiResource('/siswa', App\Http\Controllers\Api\SiswaController::class);
+Route::get('/siswa', 'App\Http\Controllers\Api\siswaController@index');
+Route::post('/siswa', 'App\Http\Controllers\Api\siswaController@store');
+Route::put('/siswa', 'App\Http\Controllers\Api\siswaController@update');
+Route::delete('/siswa', 'App\Http\Controllers\Api\siswaController@destroy');
