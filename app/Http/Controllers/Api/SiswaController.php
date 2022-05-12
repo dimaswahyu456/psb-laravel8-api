@@ -30,7 +30,16 @@ class SiswaController extends Controller
     {
         //set validation
         $validator = Validator::make($request->all(), [
-            'nama_siswa'   => 'required'
+            'nisn'   => 'required',
+            'nama_siswa'   => 'required',
+            'alamat_siswa'   => 'required',
+            'jenis_kelamin'   => 'required',
+            'agama'   => 'required',
+            'tempat_lahir'   => 'required',
+            'tanggal_lahir'   => 'required',
+            'id_sekolah'   => 'required',
+            'id_prestasi'   => 'required',
+            'id_wali'   => 'required',
         ]);
 
         //response error validation
@@ -40,7 +49,17 @@ class SiswaController extends Controller
 
         //save to database
         $siswa = siswa::create([
-            'nama_siswa'     => $request->siswa
+            'nisn'     => $request->siswa,
+            'nama_siswa'     => $request->siswa,
+            'alamat_siswa'     => $request->siswa,
+            'jenis_kelamin'     => $request->siswa,
+            'agama'     => $request->siswa,
+            'tempat_lahir'     => $request->siswa,
+            'tanggal_lahir'     => $request->siswa,
+            'nama_siswa'     => $request->siswa,
+            'id_sekolah'     => $request->siswa,
+            'id_prestasi'     => $request->siswa,
+            'id_wali'     => $request->siswa,
         ]);
 
         return new SiswaResource($siswa);
@@ -68,7 +87,16 @@ class SiswaController extends Controller
     {
         //set validation
         $validator = Validator::make($request->all(), [
-            'nama_siswa'   => 'required'
+            'nisn'   => 'required',
+            'nama_siswa'   => 'required',
+            'alamat_siswa'   => 'required',
+            'jenis_kelamin'   => 'required',
+            'agama'   => 'required',
+            'tempat_lahir'   => 'required',
+            'tanggal_lahir'   => 'required',
+            'id_sekolah'   => 'required',
+            'id_prestasi'   => 'required',
+            'id_wali'   => 'required',
         ]);
 
         //response error validation
@@ -78,7 +106,17 @@ class SiswaController extends Controller
 
         //update to database
         $siswa->update([
-            'nama_siswa'     => $request->siswa
+            'nisn'     => $request->siswa,
+            'nama_siswa'     => $request->siswa,
+            'alamat_siswa'     => $request->siswa,
+            'jenis_kelamin'     => $request->siswa,
+            'agama'     => $request->siswa,
+            'tempat_lahir'     => $request->siswa,
+            'tanggal_lahir'     => $request->siswa,
+            'nama_siswa'     => $request->siswa,
+            'id_sekolah'     => $request->siswa,
+            'id_prestasi'     => $request->siswa,
+            'id_wali'     => $request->siswa,
         ]);
 
         return new SiswaResource($siswa);
