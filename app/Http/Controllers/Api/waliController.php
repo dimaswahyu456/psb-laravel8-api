@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\wali;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\waliResource;
+use Illuminate\Support\Facades\Validator;
 
 class waliController extends Controller
 {
@@ -14,7 +17,7 @@ class waliController extends Controller
      */
     public function index()
     {
-        //
+        return new waliResource(wali::all());
     }
 
     /**
@@ -35,24 +38,39 @@ class waliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //set validation
+         $validator = Validator::make($request->all(), [
+            'wali_guru'   => 'required'
+        ]);
+
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //save to database
+        $wali = wali::create([
+            'wali_guru'     => $request->wali_guru
+        ]);
+
+        return new waliResource($wali);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $wali
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(wali $wali)
     {
-        //
+        return new waliResource($wali);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $wali
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,12 +82,27 @@ class waliController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $wali
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,wali $wali)
     {
-        //
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'wali_guru'   => 'required'
+        ]);
+
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //update to database
+        $wali->update([
+            'wali_guru'     => $request->wali_guru
+        ]);
+
+        return new waliResource($wali);
     }
 
     /**
@@ -78,8 +111,10 @@ class waliController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(wali $wali)
     {
-        //
+        $wali->delete();
+        
+        return new waliResource($wali);
     }
 }
