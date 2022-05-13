@@ -17,14 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('/siswa', App\Http\Controllers\Api\SiswaController::class);
-Route::get('/wali', 'App\Http\Controllers\Api\waliController@index');
-Route::post('/wali', 'App\Http\Controllers\Api\waliController@store');
-Route::put('/wali', 'App\Http\Controllers\Api\waliController@update');
-Route::delete('/wali', 'App\Http\Controllers\Api\waliController@destroy');
+Route::post('/wali', 'App\Http\Controllers\Api\WaliController@store');
+Route::get('/wali', 'App\Http\Controllers\Api\WaliController@index');
+Route::put('/wali', 'App\Http\Controllers\Api\WaliController@update');
+Route::delete('/wali', 'App\Http\Controllers\Api\WaliController@destroy');
+Route::get('/wali/all', 'App\Http\Controllers\Api\WaliController@showWithSiswa');
 
-Route::apiResource('/siswa', App\Http\Controllers\Api\SiswaController::class);
-Route::get('/siswa', 'App\Http\Controllers\Api\siswaController@index');
-Route::post('/siswa', 'App\Http\Controllers\Api\siswaController@store');
-Route::put('/siswa', 'App\Http\Controllers\Api\siswaController@update');
-Route::delete('/siswa', 'App\Http\Controllers\Api\siswaController@destroy');
+Route::post('/siswa', 'App\Http\Controllers\Api\SiswaController@store');
+Route::get('/siswa', 'App\Http\Controllers\Api\SiswaController@index');
+Route::put('/siswa', 'App\Http\Controllers\Api\SiswaController@update');
+Route::delete('/siswa', 'App\Http\Controllers\Api\SiswaController@destroy');
