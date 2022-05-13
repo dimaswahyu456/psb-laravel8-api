@@ -1,111 +1,107 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Wali;
+use App\Models\siswa;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\WaliResource;
+use Illuminate\Support\Facades\Validator;
+use DB;
 
 class WaliController extends Controller
 {
-    //
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
-        $wali = Wali::all();
-        $data = ['wali' => $wali];
-        return $data;
+        return new WaliResource(Wali::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         //
         $wali = new Wali();
-        $wali->wali = $request->wali_guru;
+        $wali->wali_guru = $request->wali_guru;
         $wali->save();
 
         return "Data Tersimpan";
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'wali_guru'   => 'required'
+        ]);
+
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //save to database
+        $wali = Wali::create([
+            'wali_guru'     => $request->wali_guru
+        ]);
+
+        return new WaliResource($wali);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\siswa  $siswa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Wali $wali)
+    public function show()
     {
-        //
+        $wali = Wali::select('id', 'wali_guru')->get();
+
+
+        return new WaliResource($wali);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\siswa  $siswa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Wali $wali)
+    public function update(Request $request)
     {
-        //
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'id'   => 'required',
+            'wali_guru'   => 'required'
+        ]);
+
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //update to database
+        $wali = Wali::where('id', $request->id)->update([
+            'wali_guru' => $request->wali_guru
+        ]);
+
+        $result = Wali::where('id', $request->id)->first();
+
+        return new WaliResource($result);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\siswa  $siswa
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Request $request)
     {
-        //
-        $wali = Wali::find($id);
-        $wali->wali_guru = $request->wali_guru;
-        $wali->save();
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'id'   => 'required'
+        ]);
 
-        return "Data Terupdate";
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $wali = Wali::where('id', $request->id)->delete();
+
+        $result = array("status" => "sukses", "message" => "Hapus Berhasil");
+
+        return new WaliResource($result);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\siswa  $siswa
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
+    public function showWithSiswa()
     {
-        //
-        $wali = Wali::find($id);
-        $wali->delete();
-
-        return "Data Terhapus";
-    }
-
-    public function detail($id)
-    {
-        //
-        $wali = Wali::find($id);
-
-        return $wali;
+        $result =  DB::table('siswas')
+            ->join('walis', 'walis.id', '=', 'siwas.id_wali')
+            ->get();
+        return $result;
     }
 }

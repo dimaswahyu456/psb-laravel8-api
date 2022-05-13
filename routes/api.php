@@ -21,7 +21,6 @@ Route::post('/wali', 'App\Http\Controllers\Api\WaliController@store');
 Route::get('/wali', 'App\Http\Controllers\Api\WaliController@index');
 Route::put('/wali', 'App\Http\Controllers\Api\WaliController@update');
 Route::delete('/wali', 'App\Http\Controllers\Api\WaliController@destroy');
-Route::view('/wali', 'App\Http\Controllers\Api\WaliController@joinTable');
 
 Route::post('/siswa', 'App\Http\Controllers\Api\SiswaController@store');
 Route::get('/siswa', 'App\Http\Controllers\Api\SiswaController@index');
