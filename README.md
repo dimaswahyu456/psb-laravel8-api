@@ -1,5 +1,7 @@
 # PSB (APLIKASI PENERIMAAN SISWA BARU)
 
+# UTS WHISTLER RAKA PRATAMA L (19053034)
+
 ## Requirements
 
 1. php version 7.4
@@ -20,40 +22,42 @@
 git checkout -b nama_branch
 
 ## modul
-* project/login -> jun (abaikan)
 
+-   project/login -> jun (abaikan)
 
 ## Membuat Model
 
-* php artisan make:model nama_model -m
-* example:
-* php artisan make:model siswa -r 
+-   php artisan make:model nama_model -m
+-   example:
+-   php artisan make:model siswa -r
 
 ## Membuat Resource
 
-* php artisan make:resource nama_resource
-* example :
-* php artisan make:resource SiswaResource
+-   php artisan make:resource nama_resource
+-   example :
+-   php artisan make:resource SiswaResource
 
 ## Membuat Controller
-* php artisan make:controller Api\SiswaController -r 
+
+-   php artisan make:controller Api\SiswaController -r
 
 ## Check Route
-* php artisan route:list
+
+-   php artisan route:list
 
 # Git Flow (Alur Git)
-* dilarang merge isi beta ke live dan master
-* dilarang pull beta ke live dan master
-* jika ingin membuat project baru, pastikan induknya adalah branch master atau branch live
-* dilarang push di branch project/design-system (hanya boleh pull di branch sendiri)
+
+-   dilarang merge isi beta ke live dan master
+-   dilarang pull beta ke live dan master
+-   jika ingin membuat project baru, pastikan induknya adalah branch master atau branch live
+-   dilarang push di branch project/design-system (hanya boleh pull di branch sendiri)
 
 ## Perintah Bikin Branch Baru
-* git checkout -b nama_branch
-* contoh
-* git checkout -b project/tsukamoto
+
+-   git checkout -b nama_branch
+-   contoh
+-   git checkout -b project/tsukamoto
 
 ## Tambahkan Code Dibawah ini untuk menambahkan route
-* Route::apiResource('/kota', App\Http\Controllers\Api\KotaController::class);
 
-
-
+-   Route::apiResource('/kota', App\Http\Controllers\Api\KotaController::class);
