@@ -97,7 +97,7 @@ class SiswaController extends Controller
         }
 
         //update to database
-        $siswa->update([
+        $wali = siswa::where('id', $request->id)->update([
             'nisn'     => $request->nisn,
             'nama_siswa'     => $request->nama_siswa,
             'alamat_siswa'     => $request->alamat_siswa,
@@ -106,6 +106,8 @@ class SiswaController extends Controller
             'tempat_lahir'     => $request->tempat_lahir,
             'tanggal_lahir'     => $request->tanggal_lahir
         ]);
+
+        $result = siswa::where('id', $request->id)->first();
 
         return new SiswaResource($siswa);
     }
@@ -116,10 +118,22 @@ class SiswaController extends Controller
      * @param  siswa $siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(siswa $siswa)
+    public function destroy(Request $request)
     {
-        $siswa->delete();
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'id'   => 'required'
+        ]);
 
-        return new SiswaResource($siswa);
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $wali = siswa::where('id', $request->id)->delete();
+
+        $result = array("status" => "sukses", "message" => "Hapus Berhasil");
+
+        return new SiswaResource($result);
     }
 }
