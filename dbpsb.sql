@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Bulan Mei 2022 pada 16.52
+-- Waktu pembuatan: 13 Bulan Mei 2022 pada 17.12
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.27
 
@@ -80,7 +80,9 @@ CREATE TABLE `siswas` (
 --
 
 INSERT INTO `siswas` (`id`, `nisn`, `nama_siswa`, `alamat_siswa`, `jenis_kelamin`, `agama`, `tempat_lahir`, `tanggal_lahir`, `id_sekolah`, `id_prestasi`) VALUES
-(123, '19053033', 'bagus', 'laban', 'laki-laki', 'islam', 'surabya', '2000-05-23', NULL, NULL);
+(1, '123', 'randy', 'sby', 'L', 'islam', '', '0000-00-00', NULL, NULL),
+(2, '456', 'FITROH', 'gresik', 'L', 'islam', NULL, NULL, NULL, NULL),
+(3, '789', 'vicky', 'gresik', 'L', 'islam', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,8 +126,8 @@ CREATE TABLE `walis` (
 --
 
 INSERT INTO `walis` (`id`, `wali_guru`, `created_at`, `updated_at`) VALUES
-(1, 'sarah', '2022-05-13 06:22:21', '2022-05-13 06:22:21'),
-(2, 'Bagus', '2022-05-13 01:47:14', '2022-05-13 01:47:14');
+(1, 'suryo atmojo', '2022-05-13 06:22:21', '2022-05-13 06:22:21'),
+(2, 'suzaan', '2022-05-13 01:47:14', '2022-05-13 01:47:14');
 
 --
 -- Indexes for dumped tables
