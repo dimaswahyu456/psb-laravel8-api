@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiswaResource;
 use Illuminate\Support\Facades\Validator;
+use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class SiswaController extends Controller
 {
@@ -36,10 +38,7 @@ class SiswaController extends Controller
             'jenis_kelamin'   => 'required',
             'agama'   => 'required',
             'tempat_lahir'   => 'required',
-            'tanggal_lahir'   => 'required',
-            'id_sekolah'   => 'required',
-            'id_prestasi'   => 'required',
-            'id_wali'   => 'required',
+            'tanggal_lahir'   => 'required'
         ]);
 
         //response error validation
@@ -49,17 +48,13 @@ class SiswaController extends Controller
 
         //save to database
         $siswa = siswa::create([
-            'nisn'     => $request->siswa,
-            'nama_siswa'     => $request->siswa,
-            'alamat_siswa'     => $request->siswa,
-            'jenis_kelamin'     => $request->siswa,
-            'agama'     => $request->siswa,
-            'tempat_lahir'     => $request->siswa,
-            'tanggal_lahir'     => $request->siswa,
-            'nama_siswa'     => $request->siswa,
-            'id_sekolah'     => $request->siswa,
-            'id_prestasi'     => $request->siswa,
-            'id_wali'     => $request->siswa,
+            'nisn'     => $request->nisn,
+            'nama_siswa'     => $request->nama_siswa,
+            'alamat_siswa'     => $request->alamat_siswa,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'agama'     => $request->agama,
+            'tempat_lahir'     => $request->tempat_lahir,
+            'tanggal_lahir'     => $request->tanggal_lahir
         ]);
 
         return new SiswaResource($siswa);
@@ -93,10 +88,7 @@ class SiswaController extends Controller
             'jenis_kelamin'   => 'required',
             'agama'   => 'required',
             'tempat_lahir'   => 'required',
-            'tanggal_lahir'   => 'required',
-            'id_sekolah'   => 'required',
-            'id_prestasi'   => 'required',
-            'id_wali'   => 'required',
+            'tanggal_lahir'   => 'required'
         ]);
 
         //response error validation
@@ -105,19 +97,17 @@ class SiswaController extends Controller
         }
 
         //update to database
-        $siswa->update([
-            'nisn'     => $request->siswa,
-            'nama_siswa'     => $request->siswa,
-            'alamat_siswa'     => $request->siswa,
-            'jenis_kelamin'     => $request->siswa,
-            'agama'     => $request->siswa,
-            'tempat_lahir'     => $request->siswa,
-            'tanggal_lahir'     => $request->siswa,
-            'nama_siswa'     => $request->siswa,
-            'id_sekolah'     => $request->siswa,
-            'id_prestasi'     => $request->siswa,
-            'id_wali'     => $request->siswa,
+        $wali = siswa::where('id', $request->id)->update([
+            'nisn'     => $request->nisn,
+            'nama_siswa'     => $request->nama_siswa,
+            'alamat_siswa'     => $request->alamat_siswa,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'agama'     => $request->agama,
+            'tempat_lahir'     => $request->tempat_lahir,
+            'tanggal_lahir'     => $request->tanggal_lahir
         ]);
+
+        $result = siswa::where('id', $request->id)->first();
 
         return new SiswaResource($siswa);
     }
@@ -128,10 +118,22 @@ class SiswaController extends Controller
      * @param  siswa $siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(siswa $siswa)
+    public function destroy(Request $request)
     {
-        $siswa->delete();
-        
-        return new SiswaResource($siswa);
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'id'   => 'required'
+        ]);
+
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $wali = siswa::where('id', $request->id)->delete();
+
+        $result = array("status" => "sukses", "message" => "Hapus Berhasil");
+
+        return new SiswaResource($result);
     }
 }
