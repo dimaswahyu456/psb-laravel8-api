@@ -3,39 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Wali;
+use App\Models\siswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WaliResource;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class WaliController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return new WaliResource(Wali::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $Wali = new Wali();
+        $Wali->wali_guru = $request->wali_guru;
+        $Wali->save();
+
+        return "Data Tersimpan";
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //set validation
@@ -56,40 +47,19 @@ class WaliController extends Controller
         return new WaliResource($Wali);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Wali $Wali)
+    public function show()
     {
+        $Wali = Wali::select('id', 'wali_guru')->get();
+
+
         return new WaliResource($Wali);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Wali $Wali)
+    public function update(Request $request)
     {
         //set validation
         $validator = Validator::make($request->all(), [
+            'id'   => 'required',
             'wali_guru'   => 'required'
         ]);
 
@@ -99,24 +69,39 @@ class WaliController extends Controller
         }
 
         //update to database
-        $Wali->update([
-            'wali_guru'     => $request->wali_guru
+        $Wali = Wali::where('id', $request->id)->update([
+            'wali_guru' => $request->wali_guru
         ]);
 
-        return new WaliResource($Wali);
+        $result = Wali::where('id', $request->id)->first();
+
+        return new WaliResource($result);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Wali $Wali)
+    public function destroy(Request $request)
     {
-        $Wali->delete();
-        
-        return new WaliResource($Wali);
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'id'   => 'required'
+        ]);
+
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $Wali = Wali::where('id', $request->id)->delete();
+
+        $result = array("status" => "sukses", "message" => "Hapus Berhasil");
+
+        return new WaliResource($result);
+    }
+
+    public function showWithSiswa()
+    {
+        $result =  DB::table('siswas')
+            ->join('walis', 'walis.id', '=', 'siwas.id_wali')
+            ->get();
+        return $result;
     }
 }
