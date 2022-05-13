@@ -22,3 +22,8 @@ Route::get('/wali', 'App\Http\Controllers\Api\waliController@index');
 Route::post('/wali', 'App\Http\Controllers\Api\waliController@store');
 Route::put('/wali', 'App\Http\Controllers\Api\waliController@update');
 Route::delete('/wali', 'App\Http\Controllers\Api\waliController@destroy');
+
+Route::delete('/siswa', 'App\Http\Controllers\Api\siswaController@destroy');
+Route::delete('/siswa', 'App\Http\Controllers\Api\siswaController@destroy');
+Route::delete('/siswa', 'App\Http\Controllers\Api\siswaController@destroy');
+Route::delete('/siswa', 'App\Http\Controllers\Api\siswaController@destroy');
