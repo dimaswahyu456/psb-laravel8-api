@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Wali;
+use App\Models\siswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WaliResource;
@@ -46,16 +47,19 @@ class WaliController extends Controller
         return new WaliResource($wali);
     }
 
-    public function show(Wali $wali)
+    public function show()
     {
-        //
+        $wali = Wali::select('id', 'wali_guru')->get();
+
+
         return new WaliResource($wali);
     }
 
-    public function update(Request $request, Wali $wali)
+    public function update(Request $request)
     {
         //set validation
         $validator = Validator::make($request->all(), [
+            'id'   => 'required',
             'wali_guru'   => 'required'
         ]);
 
@@ -65,26 +69,39 @@ class WaliController extends Controller
         }
 
         //update to database
-        $wali->update([
-            'wali_guru'     => $request->wali_guru
+        $wali = Wali::where('id', $request->id)->update([
+            'wali_guru' => $request->wali_guru
         ]);
 
-        return new WaliResource($wali);
+        $result = Wali::where('id', $request->id)->first();
+
+        return new WaliResource($result);
     }
 
-    public function destroy(Wali $wali)
+    public function destroy(Request $request)
     {
-        $wali->delete();
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'id'   => 'required'
+        ]);
 
-        return new WaliResource($wali);
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $wali = Wali::where('id', $request->id)->delete();
+
+        $result = array("status" => "sukses", "message" => "Hapus Berhasil");
+
+        return new WaliResource($result);
     }
 
-    public function joinTable()
+    public function showWithSiswa()
     {
-        $data = DB::table('walis')
-            ->join('siswas', 'siswas.id_wali', '=', 'walis.id')
+        $result =  DB::table('siswas')
+            ->join('walis', 'walis.id', '=', 'siwas.id_wali')
             ->get();
-
-        return $data;
+        return $result;
     }
 }
